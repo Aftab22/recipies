@@ -1,0 +1,25 @@
+{
+  "name": "recipies",
+  "version": "1.0.0",
+  "description": "vanilla javascript application for fetching recipies",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Aftab22/recipies.git"
+  },
+  "keywords": [
+    "vanilla",
+    "javascripit",
+    "html",
+    "css"
+  ],
+  "author": "Aftab Faisal",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Aftab22/recipies/issues"
+  },
+  "homepage": "https://github.com/Aftab22/recipies#readme"
+}
