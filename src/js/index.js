@@ -1,1 +1,1 @@
-// Global app controller
+console.warn("hello world")
