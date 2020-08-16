@@ -1,7 +1,7 @@
 {
-  "name": "recipies",
+  "name": "recipes",
   "version": "1.0.0",
-  "description": "Vanilla js project to fetch recipies from api",
+  "description": "Vanilla js project to fetch recipes from api",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

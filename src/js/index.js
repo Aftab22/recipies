@@ -5,7 +5,7 @@ import { uiElements } from "./views/uiElements";
 // Global State of our app
 // -Search Object
 // -Current ObjectShopping List
-// -Liked Recipies
+// -Liked Recipes
 const state = {
   search: null,
 };
@@ -21,6 +21,7 @@ const controlSearch = async () => {
     //4.perform search api call for search object
     await state.search.getResults();
     //5.Render the result of API call
+    searchView.renderResults(state.search.results)
     console.warn(state.search.results);
   }
 };
