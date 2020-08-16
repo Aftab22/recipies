@@ -1,6 +1,6 @@
 import Search from "./models/Search";
 import * as searchView from "./views/searchView";
-import { uiElements } from "./views/uiElements";
+import { uiElements , renderLoader ,clearLoader} from "./views/uiElements";
 
 // Global State of our app
 // -Search Object
@@ -20,9 +20,11 @@ const controlSearch = async () => {
     //3.Prepare the UI for search results
     searchView.clearInput();
     searchView.clearResults();
+    renderLoader(uiElements.resultsContainer);
     //4.perform search api call for search object
     await state.search.getResults();
     //5.Render the result of API call
+    clearLoader();
     searchView.renderResults(state.search.results);
     console.warn(state.search.results);
   }
