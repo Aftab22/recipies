@@ -15,6 +15,21 @@ export const clearResults = () => {
   uiElements.listOfRecipies.innerHTML = "";
 };
 
+const limitRecipeTitle = (title, limit = 17) => {
+  if (title.length > limit) {
+    let titleSplitted = title.split(" ");
+    let newTitle = [];
+    titleSplitted.reduce((totalLength, currentTitle) => {
+      if (totalLength + currentTitle.length <= limit) {
+        newTitle.push(currentTitle);
+      }
+      return totalLength + currentTitle.length;
+    }, 0);
+    return `${newTitle.join(",")}...`;
+  }
+  return title;
+};
+
 //create a HTML list element for each recipe , fill each field passed by renderResults forEach loop and add it to HTML
 const renderRecipe = (recipe) => {
   const markup = `
@@ -24,7 +39,7 @@ const renderRecipe = (recipe) => {
               <img src="${recipe.image_url}" alt="Test">
           </figure>
           <div class="results__data">
-              <h4 class="results__name">${recipe.title}</h4>
+              <h4 class="results__name">${limitRecipeTitle(recipe.title)}</h4>
               <p class="results__author">${recipe.publisher}</p>
           </div>
       </a>
