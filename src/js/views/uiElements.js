@@ -3,6 +3,7 @@ export const uiElements = {
   searchInput: document.querySelector(".search__field"),
   listOfRecipies: document.querySelector(".results__list"),
   resultsContainer: document.querySelector(".results"),
+  buttonsContainer: document.querySelector(".results__pages"),
 };
 
 export const elementStrings = {

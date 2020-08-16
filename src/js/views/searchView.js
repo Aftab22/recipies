@@ -13,6 +13,7 @@ export const clearInput = () => {
 //clear previous search results
 export const clearResults = () => {
   uiElements.listOfRecipies.innerHTML = "";
+  uiElements.buttonsContainer.innerHTML = "";
 };
 
 const limitRecipeTitle = (title, limit = 17) => {
@@ -48,9 +49,48 @@ const renderRecipe = (recipe) => {
   uiElements.listOfRecipies.insertAdjacentHTML("beforeend", markup);
 };
 
+//type can be 'previous' or 'next'
+const createButton = (page, type, numOfPages) =>
+  `
+  <button class="btn-inline results__btn--${
+    type === "previous" ? "prev" : "next"
+  }" data-gotopage=${type === "previous" ? page - 1 : page + 1}>
+      <svg class="search__icon">
+          <use href="img/icons.svg#icon-triangle-${
+            type === "previous" ? "left" : "right"
+          }"></use>
+      </svg>
+      <span>Page ${type === "previous" ? page - 1 : page + 1}${
+    type === "next" && numOfPages > 1 ? "/" + numOfPages : ""
+  }</span>
+  </button>
+  `;
+
+const renderPaginationButtons = (page, totalRecipies, recipesPerPage) => {
+  const numOfPages = Math.ceil(totalRecipies / recipesPerPage);
+  let button;
+  if (page === 1 && numOfPages > 1) {
+    //Button to go to next page
+    button = createButton(page, "next", numOfPages);
+  } else if (page < numOfPages && numOfPages > 1) {
+    //Button to go to next page AND previous page
+    button = `
+    ${createButton(page, "next", numOfPages)}
+    ${createButton(page, "previous")}
+    `;
+  } else if (page === numOfPages && numOfPages > 1) {
+    //Button to go to previous page
+    button = createButton(page, "previous");
+  }
+  uiElements.buttonsContainer.insertAdjacentHTML("afterbegin", button);
+};
 //recieve recipes , loop and pass to renderer
-export const renderResults = (recipes) => {
-  recipes.forEach((recipe) => {
+//add pagination
+export const renderResults = (recipes, page = 1, recipesPerPage = 5) => {
+  const start = (page - 1) * recipesPerPage;
+  const end = page * recipesPerPage;
+  recipes.slice(start, end).forEach((recipe) => {
     renderRecipe(recipe);
   });
+  renderPaginationButtons(page, recipes.length, recipesPerPage);
 };
