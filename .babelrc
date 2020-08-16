@@ -1,6 +1,14 @@
 {
   "presets": ["@babel/preset-env"],
-  "plugins": [
-      ["@babel/transform-runtime"]
-  ]
+  "plugins": [["@babel/transform-runtime"]]
 }
+
+/*
+async did not work without installing these and adding plugin
+npm install --save @babel/runtime 
+npm install --save-dev @babel/plugin-transform-runtime
+
+"plugins": [
+        ["@babel/transform-runtime"]
+    ]
+*/
