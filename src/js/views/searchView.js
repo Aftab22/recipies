@@ -5,6 +5,16 @@ export const getInput = () => {
   return uiElements.searchInput.value;
 };
 
+//clear the previously typed search query
+export const clearInput = () => {
+  uiElements.searchInput.value = "";
+};
+
+//clear previous search results
+export const clearResults = () => {
+  uiElements.listOfRecipies.innerHTML = "";
+};
+
 //create a HTML list element for each recipe , fill each field passed by renderResults forEach loop and add it to HTML
 const renderRecipe = (recipe) => {
   const markup = `

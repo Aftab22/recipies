@@ -18,10 +18,12 @@ const controlSearch = async () => {
     //2.create new search object and add to state
     state.search = new Search(query);
     //3.Prepare the UI for search results
+    searchView.clearInput();
+    searchView.clearResults();
     //4.perform search api call for search object
     await state.search.getResults();
     //5.Render the result of API call
-    searchView.renderResults(state.search.results)
+    searchView.renderResults(state.search.results);
     console.warn(state.search.results);
   }
 };
