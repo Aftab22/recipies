@@ -3,13 +3,11 @@ const path = require("path");
 module.exports = {
   entry: "./src/js/index.js",
   output: {
-    filename: "bundle.js",
-    path: path.resolve(__dirname, "dist/js"),
+    path: path.resolve(__dirname, "dist"),
+    filename: "js/bundle.js",
   },
   devServer: {
-    contentBase: path.join(__dirname, "dist"),
-    compress: true,
-    port: 9000,
+    contentBase: path.resolve(__dirname, "dist"),
   },
   module: {
     rules: [{ test: /\.js$/, exclude: /node_modules/, loader: "babel-loader" }],
