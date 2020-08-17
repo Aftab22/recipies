@@ -1,6 +1,11 @@
 import Search from "./models/Search";
+import Recipe from "./models/Recipe";
 import * as searchView from "./views/searchView";
-import { uiElements, renderLoader, clearLoader } from "./views/uiElements";
+import {
+  uiElements,
+  renderLoader,
+  clearLoader
+} from "./views/uiElements";
 
 // Global State of our app
 // -Search Object
@@ -10,6 +15,10 @@ const state = {
   search: null,
 };
 
+
+
+
+//Search Controller
 const controlSearch = async () => {
   //step2 perform search
   //1.get search query
@@ -22,11 +31,16 @@ const controlSearch = async () => {
     searchView.clearResults();
     renderLoader(uiElements.resultsContainer);
     //4.perform search api call for search object
-    await state.search.getResults();
-    //5.Render the result of API call
-    clearLoader();
-    searchView.renderResults(state.search.results);
-    console.warn(state.search.results);
+    try {
+      await state.search.getResults();
+      //5.Render the result of API call
+      clearLoader();
+      searchView.renderResults(state.search.results);
+      console.warn(state.search.results);
+    } catch (error) {
+      alert(error)
+      clearLoader();
+    }
   }
 };
 
@@ -44,3 +58,29 @@ uiElements.buttonsContainer.addEventListener("click", (event) => {
     searchView.renderResults(state.search.results, goToPage);
   }
 });
+
+
+
+//Recipe Controller
+
+const controlRecipe = async () => {
+  const id = window.location.hash.replace("#", '');
+  if (id) {
+    state.recipe = new Recipe(id)
+    try {
+      await state.recipe.getRecipeDetails();
+      state.recipe.calculateCookTime();
+      console.warn(state.recipe);
+    } catch (error) {
+      alert(error)
+    }
+
+  }
+}
+
+
+window.addEventListener("hashchange", controlRecipe);
+window.addEventListener("load", controlRecipe);
+["hashchange", "load"].forEach((event) => {
+  window.addEventListener(event, controlRecipe)
+})
