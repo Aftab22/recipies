@@ -15,9 +15,6 @@ const state = {
   search: null,
 };
 
-
-
-
 //Search Controller
 const controlSearch = async () => {
   //step2 perform search
@@ -59,8 +56,6 @@ uiElements.buttonsContainer.addEventListener("click", (event) => {
   }
 });
 
-
-
 //Recipe Controller
 
 const controlRecipe = async () => {
@@ -70,6 +65,7 @@ const controlRecipe = async () => {
     try {
       await state.recipe.getRecipeDetails();
       state.recipe.calculateCookTime();
+      state.recipe.parseIngredients();
       console.warn(state.recipe);
     } catch (error) {
       alert(error)
